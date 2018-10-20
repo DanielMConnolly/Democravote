@@ -104,6 +104,11 @@ router.get('/', function(req, res) {
     res.render('index', { title: 'Debate Society Voting' });
 });
 
+router.get('/register', function(req, res) {
+    res.render('register', { title: 'Debate Society Voting' });
+});
+
+
 router.get('/newuser', function(req, res) {
     res.render('newuser', { title: 'Add New User' });
 });
