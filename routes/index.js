@@ -109,27 +109,35 @@ router.get('/listmotions', function(req, res) {
 });
 
 router.get('/vote/:motion', function(req, res){
-    var motion = req.params.motion;
+    var motion = req.params.motion
 
-    res.render('vote', { title: 'Vote on a motion', motion: motion});
+    var MongoClient = require('mongodb').MongoClient;
+    var uri = "mongodb+srv://srini:srini55@bigredcluster-q026c.mongodb.net/testConnect?retryWrites=true";
+      MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
+        const collection = client.db("testConnect").collection("motions");
+          collection.find({"motiontitle": motion}).toArray(function(e,docs){
+            res.render('vote', {
+                "motion" : docs[0], 
+            });
+        });
+        client.close();
+      });
+
 
 });
 
-router.post('/:motion/submitvote', function(req, res){
+submit_votes = router.post('/:motion/submitvote', function(req, res){
     var motion = req.params.motion;
     var vote = req.body.vote;
-
+   
     var MongoClient = require('mongodb').MongoClient;
     var uri = "mongodb+srv://srini:srini55@bigredcluster-q026c.mongodb.net/testConnect?retryWrites=true";
     MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
         const collection = client.db("testConnect").collection("motions");
-        collection.findOneAndUpdate({
-                query: {"motiontitle" : motion}, 
-                update: {$inc: {"vote": 1}}
-            });
-        client.close();
-      });
+        collection.update({"motiontitle": motion}, {$inc: { [vote] : 1} });
     res.redirect('/listmotions');
+
+});
 });
 
 

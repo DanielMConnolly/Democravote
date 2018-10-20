@@ -3,14 +3,18 @@ extends layout
 block content
     .jumbotron
         
-        h1 Vote on #{motion}
+        h1 Vote on #{motion.motiontitle}
 
-        form(name="add-estimation", method="post", action='/#{motion}/submitvote')
+
+        form(name="voteform", method="post", action='/#{motion.motiontitle}/submitvote')
             .radio
                 label(for='yes') Yes
-                input#yes(type="radio" name ="vote" checked) 
+                input#yes(type="radio" name ="vote" value="yes" checked) 
             .radio
                 label(for='no') No
-                input#no(type="radio" name ="vote")  
+                input#no(type="radio" name ="vote" value="no")  
             button.btn.btn-primary(type='submit') Submit
-
+    .row 
+      h1 Past Submissions
+        p YES: #{motion.yes}
+        p NO: #{motion.no}
