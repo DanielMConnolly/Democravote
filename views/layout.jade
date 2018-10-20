@@ -4,6 +4,17 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-
+    link(rel='stylesheet', href='/stylesheets/navbar.css')
   body
+    ul
+      li
+        a.active(href='/') Home
+      li
+        a(href='/register') Register
+      li
+        a(href='/login') Login
+      li
+        a(href='/listmotions') Motion List
+      li
+        a(href='/newmotion') New Motion
     block content

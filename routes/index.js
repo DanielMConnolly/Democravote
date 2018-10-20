@@ -82,8 +82,16 @@ router.get('/userlist', function(req, res) {
       });
 });
 
+router.get('/', function(req, res) {
+    res.render('index', { title: 'Debate Society Voting' });
+});
+
 router.get('/newuser', function(req, res) {
     res.render('newuser', { title: 'Add New User' });
+});
+
+router.get('/login', function(req, res) {
+    res.render('login', { title: 'Add New User' });
 });
 
 router.get('/deluser', function(req, res) {
@@ -93,6 +101,7 @@ router.get('/deluser', function(req, res) {
 router.get('/newmotion', function(req, res) {
   res.render('newmotion', { title: 'Submit a Motion'})
 });
+
 
 router.get('/listmotions', function(req, res) {
     var MongoClient = require('mongodb').MongoClient;
@@ -117,7 +126,7 @@ router.get('/vote/:motion', function(req, res){
         const collection = client.db("testConnect").collection("motions");
           collection.find({"motiontitle": motion}).toArray(function(e,docs){
             res.render('vote', {
-                "motion" : docs[0], 
+                "motion" : docs[0],
             });
         });
         client.close();
@@ -129,7 +138,7 @@ router.get('/vote/:motion', function(req, res){
 submit_votes = router.post('/:motion/submitvote', function(req, res){
     var motion = req.params.motion;
     var vote = req.body.vote;
-   
+
     var MongoClient = require('mongodb').MongoClient;
     var uri = "mongodb+srv://srini:srini55@bigredcluster-q026c.mongodb.net/testConnect?retryWrites=true";
     MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
