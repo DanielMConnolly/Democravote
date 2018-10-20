@@ -5,5 +5,4 @@ block content
     User List
   ul
     each user, i in userlist
-      li
-        a(href="mailto:#{user.email}")= user.vote
+      li <b>Name:</b> #{user.username} <b>UBID:</b> #{user.ubid}

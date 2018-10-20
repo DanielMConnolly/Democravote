@@ -3,14 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-// New Code
-var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/Democravote');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+var uri = "mongodb+srv://srini:srini55@bigredcluster-q026c.mongodb.net/testConnect?retryWrites=true";
+
+var db = monk(uri);
 
 var app = express();
 
