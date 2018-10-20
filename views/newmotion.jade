@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  form#formnewmotion(name="newmotion",method="post",action="/newmotion")
+    input#inputMoionTitle(type="text", placeholder="Motion Title", name="motiontitle")
+    input#inputMotionDescription(type="text", placeholder="Motion Description", name="motiondescription")
+    button#btnSubmit(type="submit") submit

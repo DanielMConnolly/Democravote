@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1.
+    Motion List 
+  ul
+    each motion, i in listmotions
+      li 
+        a(href="vote/#{motion.motiontitle}") #{motion.motiondescription}
