@@ -16,4 +16,15 @@ router.get('/userlist', function(req, res) {
     });
 });
 
+router.get('/motionlist', function(req, res) {
+    var db = req.db;
+    var collection = db.get('motions');
+    collection.find({},{},function(e,docs){
+        res.render('motions', {
+            "motionlist" : docs
+        });
+    });
+
+});
+
 module.exports = router;
