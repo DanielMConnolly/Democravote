@@ -1,8 +1,9 @@
 extends layout
 
 block content
-  h1.
-    Motions
-  ul
-    each motion, i in motionlist
-      <li> #{motion.title} </li>
+  .jumbotron
+    h1.
+      Motions
+    ul
+      each motion, i in motionlist
+        <li> #{motion.title} </li>
