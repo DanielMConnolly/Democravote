@@ -100,8 +100,16 @@ router.get('/userlist', function(req, res) {
       });
 });
 
+router.get('/', function(req, res) {
+    res.render('index', { title: 'Debate Society Voting' });
+});
+
 router.get('/newuser', function(req, res) {
     res.render('newuser', { title: 'Add New User' });
+});
+
+router.get('/login', function(req, res) {
+    res.render('login', { title: 'Add New User' });
 });
 
 router.get('/deluser', function(req, res) {
@@ -115,6 +123,7 @@ router.get('/removemotion', function(req, res) {
 router.get('/newmotion', function(req, res) {
   res.render('newmotion', { title: 'Submit a Motion'})
 });
+
 
 router.get('/listmotions', function(req, res) {
     var MongoClient = require('mongodb').MongoClient;
