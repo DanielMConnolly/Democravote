@@ -2,7 +2,8 @@ extends layout
 
 block content
   h1.
-    Motion List
+    Motion List 2
   ul
     each motion, i in listmotions
-      li <b>Motion:</b> #{motion.motiontitle} <b>Description:</b> #{motion.motiondescription}
+      li 
+        a(href="vote/#{motion.motiontitle}") #{motion.motiondescription}

@@ -23,6 +23,7 @@ router.post('/adduser', function(req, res) {
       });
 });
 
+
 router.post('/deluser', function(req, res) {
     var userName = req.body.username;
     var MongoClient = require('mongodb').MongoClient;
@@ -42,6 +43,7 @@ router.post('/deluser', function(req, res) {
         });
         client.close();
       });
+
 });
 
 router.post('/newmotion', function(req, res) {
@@ -105,5 +107,31 @@ router.get('/listmotions', function(req, res) {
         client.close();
       });
 });
+
+router.get('/vote/:motion', function(req, res){
+    var motion = req.params.motion;
+
+    res.render('vote', { title: 'Vote on a motion', motion: motion});
+
+});
+
+router.post('/:motion/submitvote', function(req, res){
+    var motion = req.params.motion;
+    var vote = req.body.vote;
+
+    var MongoClient = require('mongodb').MongoClient;
+    var uri = "mongodb+srv://srini:srini55@bigredcluster-q026c.mongodb.net/testConnect?retryWrites=true";
+    MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
+        const collection = client.db("testConnect").collection("motions");
+        collection.findOneAndUpdate({
+                query: {"motiontitle" : motion}, 
+                update: {$inc: {"vote": 1}}
+            });
+        client.close();
+      });
+    res.redirect('/listmotions');
+});
+
+
 
 module.exports = router;

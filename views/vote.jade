@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    .jumbotron
+        
+        h1 Vote on #{motion}
+
+        form(name="add-estimation", method="post", action='/#{motion}/submitvote')
+            .radio
+                label(for='yes') Yes
+                input#yes(type="radio" name ="vote" checked) 
+            .radio
+                label(for='no') No
+                input#no(type="radio" name ="vote")  
+            button.btn.btn-primary(type='submit') Submit
+
