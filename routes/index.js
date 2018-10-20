@@ -23,10 +23,7 @@ router.post('/adduser', function(req, res) {
       });
 });
 
-<<<<<<< HEAD
-router.get('/vote', function(req, res){
-    var
-=======
+
 router.post('/deluser', function(req, res) {
     var userName = req.body.username;
     var MongoClient = require('mongodb').MongoClient;
@@ -46,7 +43,7 @@ router.post('/deluser', function(req, res) {
         });
         client.close();
       });
->>>>>>> bf83df5721bd669eec712f80b8984acf95fd1c55
+
 });
 
 router.post('/newmotion', function(req, res) {
