@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1= title
+  form#formRemoveMotion(name="removemotion",method="post",action="/removemotion")
+    input#inputUserName(type="text", placeholder="Motion Title", name="motiontitle")
+    button#btnSubmit(type="submit") submit

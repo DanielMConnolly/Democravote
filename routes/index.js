@@ -34,8 +34,7 @@ router.post('/deluser', function(req, res) {
             "username" : userName,
         }, function (err, doc) {
             if (err) {
-                print(err)
-                res.send("There was a problem finding the information to the database.");
+                res.send("There was a problem while deleting from the database.");
             }
             else {
                 res.redirect("userlist");
@@ -43,7 +42,26 @@ router.post('/deluser', function(req, res) {
         });
         client.close();
       });
+});
 
+router.post('/removemotion', function(req, res) {
+    var motionTitle = req.body.motiontitle;
+    var MongoClient = require('mongodb').MongoClient;
+    var uri = "mongodb+srv://srini:srini55@bigredcluster-q026c.mongodb.net/testConnect?retryWrites=true";
+    MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
+        const collection = client.db("testConnect").collection("motions");
+        collection.findOneAndDelete({
+            "motiontitle" : motionTitle,
+        }, function (err, doc) {
+            if (err) {
+                res.send("There was a problem while removing the motion.");
+            }
+            else {
+                res.redirect("listmotions");
+            }
+        });
+        client.close();
+      });
 });
 
 router.post('/newmotion', function(req, res) {
@@ -90,6 +108,10 @@ router.get('/deluser', function(req, res) {
   res.render('deluser', { title: 'Delete a User'})
 });
 
+router.get('/removemotion', function(req, res) {
+  res.render('removemotion', { title: 'Delete a Motion'})
+});
+
 router.get('/newmotion', function(req, res) {
   res.render('newmotion', { title: 'Submit a Motion'})
 });
@@ -117,7 +139,7 @@ router.get('/vote/:motion', function(req, res){
         const collection = client.db("testConnect").collection("motions");
           collection.find({"motiontitle": motion}).toArray(function(e,docs){
             res.render('vote', {
-                "motion" : docs[0], 
+                "motion" : docs[0],
             });
         });
         client.close();
@@ -129,7 +151,7 @@ router.get('/vote/:motion', function(req, res){
 submit_votes = router.post('/:motion/submitvote', function(req, res){
     var motion = req.params.motion;
     var vote = req.body.vote;
-   
+
     var MongoClient = require('mongodb').MongoClient;
     var uri = "mongodb+srv://srini:srini55@bigredcluster-q026c.mongodb.net/testConnect?retryWrites=true";
     MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
