@@ -6,14 +6,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/userlist', function(req, res) {
-    var db = req.db;
-    var collection = db.get('motion');
-    collection.find({},{},function(e,docs){
-        res.render('userlist', {
-            "userlist" : docs
-        });
-    });
+router.get('/vote', function(req, res){
+    var
 });
 
 router.get('/motionlist', function(req, res) {
