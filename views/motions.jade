@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  .jumbotron
+    h1.
+      Motions
+    ul
+      each motion, i in motionlist
+        <li> #{motion.title} </li>
